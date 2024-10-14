@@ -22,6 +22,7 @@ NewPing sensorUltrasonic(TRIG_PIN, ECHO_PIN, MAX_DISTANCE);
 #define reset_display -1
 Adafruit_SSD1306 display(width_display, height_display, &Wire, reset_display);
 
+
 // Definição MPU
 //MPU6050 mpu;
 
@@ -82,7 +83,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+ 
   // Leitura TOF (mm)
   int distanceTOF = sensorTOF.readRangeContinuousMillimeters();
 
@@ -117,22 +118,6 @@ void loop() {
     flag1, flag2 = 2;
   }
 
-  
-
-  /* Obter leituras do MPU
-  mpu.getAcceleration(&ax, &ay, &az);
-
-  // Cálculo da Velocidade
-  unsigned long currentTime = millis();
-  float deltaTime = (currentTime - lastTime) / 1000.0; // Convertendo para segundos
-  lastTime = currentTime;
-
-  // Converter a aceleração de raw para g (9.8 m/s²)
-  float accelX = ax / 16384.0 * 9.8;
-
-  // Calcular velocidade -> Velocidade = Velocidade_Anterior + Aceleração * Tempo
-  velocidadeX += accelX * deltaTime;
-  */
   // Limpar display
   display.clearDisplay();
   
@@ -144,12 +129,13 @@ void loop() {
 
   display.setCursor(0, 20);
   display.print("Radar de Velocidade");
+  display.setCursor(0, 30);
+  display.print("1ECB - DEV4");
 
   // Atualizar o display
   display.display();
 
   // Delay
-  delay(500);
-  flag1, flag2 = 0;
+  delay(200);
 
 }
