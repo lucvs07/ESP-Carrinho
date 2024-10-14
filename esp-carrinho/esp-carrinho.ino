@@ -4,7 +4,7 @@
 #include <Adafruit_GFX.h> // Biblioteca para o display oled
 #include <Adafruit_SSD1306.h> // Biblioteca para o display oled
 #include <Wire.h>
-#include <MPU6050.h> // Biblioteca para o sensor MPU6050
+//#include <MPU6050.h> // Biblioteca para o sensor MPU6050
 #include <VL53L0X.h> // Sensor TOF
 #include <NewPing.h> // Sensor ultrassônico
 
@@ -23,7 +23,7 @@ NewPing sensorUltrasonic(TRIG_PIN, ECHO_PIN, MAX_DISTANCE);
 Adafruit_SSD1306 display(width_display, height_display, &Wire, reset_display);
 
 // Definição MPU
-MPU6050 mpu;
+//MPU6050 mpu;
 
 //int16_t ax, ay, az; // Aceleração nos eixos
 // float velocidadeX = 0; // Velocidade no eixo X
@@ -62,8 +62,9 @@ void setup() {
     Serial.println("MPU não conectado");
     while(1);
   }
+  */
 
-  /* Inicializando o Display
+  // Inicializando o Display
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)){
     Serial.println(F("Falha ao inicializar o display"));
     while(1);
@@ -73,7 +74,7 @@ void setup() {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  */
+
 
   //lastTime = millis(); // Definindo Tempo Inicial
   Serial.println("Sistema Pronto");
@@ -112,7 +113,7 @@ void loop() {
     velocidade = (distanceSensores / Time);
     Serial.println("Velocidade calculada: ");
     Serial.println(velocidade);
-    Serial.print("cm/s")
+    Serial.print("cm/s");
     flag1, flag2 = 2;
   }
 
@@ -131,25 +132,24 @@ void loop() {
 
   // Calcular velocidade -> Velocidade = Velocidade_Anterior + Aceleração * Tempo
   velocidadeX += accelX * deltaTime;
-
-  /* Limpar display
+  */
+  // Limpar display
   display.clearDisplay();
   
   // Exibir informações no display
   display.setCursor(0, 0);
-  display.print("Velocidade X - ");
-  display.print(velocidadeX);
-  display.print("m/s");
+  display.print("Velocidade - ");
+  display.print(velocidade);
+  display.print("cm/s");
 
   display.setCursor(0, 20);
-  display.print("Aceleracao X - ");
-  display.print(accelX);
-  display.print("m/s ^2");
+  display.print("Radar de Velocidade");
 
   // Atualizar o display
   display.display();
-  */
+
   // Delay
-  delay(100);
+  delay(500);
+  flag1, flag2 = 0;
 
 }
